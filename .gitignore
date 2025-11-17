@@ -2,3 +2,5 @@ scheduler
 *.o
 *.exe
 *.out
+*.txt
+*.csv

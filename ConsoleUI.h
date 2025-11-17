@@ -6,28 +6,17 @@
 #include "Utils.h"
 #include "Freight.h"
 #include "Cargo.h"
+#include "InputHandler.h"
+#include "InputParser.h"
+#include "FileHandler.h"
 
+/**
+ * ConsoleUI - Thin coordinator for console user interface
+ * Delegates to specialized classes: InputHandler, InputParser, FileHandler
+ * Responsibility: Coordinate CRUD operations and menu navigation
+ */
 class ConsoleUI
 {
-private:
-	// Menu Option 1 - Load Files -- NA
-	
-	// Menu Option 2 - CRUD
-	static std::string ask(const char* prompt);
-	static int askTime(const char* prompt);
-
-	static FreightType parseFreightTypeUI(std::string s);
-	static int parseGroupUI(std::string s);
-	
-	// Menu Option 3 - Show Lists -- NA
-
-	// Menu Option 4 - Compute & Show -- NA
-
-	// Menu Option 7 - Save & Export
-	static std::string createCSV(std::string base);
-
-	
-
 public:
 	// Menu Option 1 - Load Files
 	void loadFilesAndValidate(FreightManager& fm, CargoManager& cm) const;

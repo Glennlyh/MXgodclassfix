@@ -61,7 +61,6 @@ bool ScheduleExporter::saveScheduleToCSV(const vector<Freight>& freights,
                                          const string& outFile) {
     pair<vector<int>, vector<int>> result = MatchingAlgorithm::computeMaximumMatching(freights, cargos);
     const vector<int>& fAssigned = result.first;
-    const vector<int>& cAssigned = result.second;
 
     ofstream out(outFile.c_str());
     if (!out.is_open()) 

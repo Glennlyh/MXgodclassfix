@@ -9,12 +9,22 @@
 #include "Freight.h"
 #include "Cargo.h"
 #include "Utils.h"
+#include "MatchingAlgorithm.h"
+#include "SchedulePrinter.h"
+#include "ScheduleExporter.h"
 
+/**
+ * MatchingEngine - Backward compatibility wrapper
+ * Delegates to specialized classes: MatchingAlgorithm, SchedulePrinter, ScheduleExporter
+ * 
+ * This class is maintained for backward compatibility.
+ * New code should use the specialized classes directly.
+ */
 class MatchingEngine {
 public:
     static constexpr int ARRIVAL_EARLY_MIN = 15;
 
-    // Part 1 (legacy maximum matching)
+    // Part 1 (legacy maximum matching) - delegates to MatchingAlgorithm
     static std::pair<std::vector<int>, std::vector<int>>
         computeMaximumMatching(const std::vector<Freight>& freights,
                                const std::vector<Cargo>& cargos);
@@ -22,6 +32,7 @@ public:
     static void printSummary(const std::vector<Freight>& freights,
                              const std::vector<Cargo>& cargos);
 
+    // File I/O - delegates to ScheduleExporter
     static bool saveScheduleToFile(const std::vector<Freight>& freights,
                                    const std::vector<Cargo>& cargos,
                                    const std::string& outFile);
@@ -30,15 +41,13 @@ public:
                                   const std::vector<Cargo>& cargos,
                                   const std::string& outFile);
 
-    // Part 5 (arrival priority)
+    // Printing - delegates to SchedulePrinter
     static void printArrivalPrioritySummary(const std::vector<Freight>& freights, 
                                             const std::vector<Cargo>& cargos);
 
-    // Part 6 (capacity-first packing overview)
     static void printCapacityFirstSummary(const std::vector<Freight>& freights,
                                           const std::vector<Cargo>& cargos);
 
-    // Part 7 (plan view)
     static void printPlanSortedByCargoTime(const std::vector<Freight>& freights,
                                            const std::vector<Cargo>& cargos);
 
@@ -51,7 +60,7 @@ public:
     static void printUnassignedCargos(const std::vector<Freight>& freights,
                                       const std::vector<Cargo>& cargos);
 
-    // Part 8 (export csv)
+    // CSV Export - delegates to ScheduleExporter
     static bool savePlanByCargoTimeCSV(const std::vector<Freight>& freights,
                                        const std::vector<Cargo>& cargos,
                                        const std::string& outFile);
